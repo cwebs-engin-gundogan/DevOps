@@ -11,3 +11,24 @@ services:
       DB_PASSWORD: your_password
       DB_HOST: localhost
       DB_PORT: 5432
+    networks:
+      - caglar1903
+    depends_on:
+      - db
+  db:
+    image: postgres:13  # PostgreSQL'in resmi imajını kullanıyoruz
+    environment:
+      POSTGRES_USER: your_user  # PostgreSQL kullanıcı adı
+      POSTGRES_PASSWORD: your_password  # PostgreSQL şifresi
+      POSTGRES_DB: your_db  # PostgreSQL veritabanı adı
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Veritabanı verilerinin kalıcı olması için volume ekliyoruz
+    networks:
+      - caglar1903
+
+networks:
+  caglar1903:
+    driver: bridge  # Bridge ağı kullanıyoruz
+
+volumes:
+  postgres_data:
