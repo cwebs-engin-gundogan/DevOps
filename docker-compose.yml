@@ -2,7 +2,8 @@ version: '3.8'
 
 services:
   web:
-    image: python:3.8-slim
+    build:
+      context: ./flask  # Flask uygulamanızın bulunduğu dizin
     ports:
       - "5000:5000"
     environment:
@@ -11,6 +12,8 @@ services:
       DB_PASSWORD: your_password
       DB_HOST: localhost
       DB_PORT: 5432
+    volumes:
+      - ./flask:/app
     networks:
       - caglar1903
     depends_on:
